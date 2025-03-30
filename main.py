@@ -23,11 +23,17 @@ def start(url):
         else:
             downloader.start_playlist(url)
     elif "watch?v=" in url:
-        format = input("Available formats:\n\t1 = Video\n\t2 = Audio\n\nEnter number: ")
-        if  format == "1":
-            downloader.start_video(url)
-        else:
-            downloader.start_audio(url)
+        set_format(url)
+    elif "shorts/" in url:
+        url = url.replace("shorts/", "watch?v=")
+        set_format(url)
+
+def set_format(url):
+    format = input("Available formats:\n\t1 = Video\n\t2 = Audio\n\nEnter number: ")
+    if  format == "1":
+        downloader.start_video(url)
+    else:
+        downloader.start_audio(url)
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
